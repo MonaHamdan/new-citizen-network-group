@@ -12,6 +12,22 @@
     letter-spacing: -3px;
     margin: 0 0 50px;
 }
+/* button */
+.btn1, .btn2 {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 5px;
+    transition: var(--main-transition);
+}
+
+.btn1 {
+    background-color: var(--main-color);
+    color: #fff;
+}
 
 /* Main content box */
 .section-info {
