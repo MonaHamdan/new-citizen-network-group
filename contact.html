@@ -1,107 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Citizen Network Group</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Citizen Network Group</title>
 
-    <link rel="stylesheet" href="fontawesome/css/all.min.css" />
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/contactcss.css">
-     <link rel="stylesheet" href="css/master.css">
+<link rel="stylesheet" href="fontawesome/css/all.min.css" />
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/contactcss.css">
+    <link rel="stylesheet" href="css/master.css">
 
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <div class="header" id="header">
-        <div class="container">
-            <a href="#" class="logo"><img src="img/logo_New_citizen.jpg"></a>
-            <ul class="main-nav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="program.html">Program</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+<!-- HEADER -->
+<div class="header" id="header">
+    <div class="container">
+        <a href="#" class="logo"><img src="img/logo_New_citizen.jpg"></a>
+        <ul class="main-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="program.html">Program</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="contact-header">
+    <h2>Contact Us</h2>
+    <p>We're here to answer your questions. Send us a message anytime.</p>
+</div>
+
+<div class="contact-container">
+
+    <!-- CONTACT FORM -->
+    
+        <form id="contactForm"  class="contact-form" onsubmit="sendEmail(event)">
+
+        <h3>Send a Message</h3>
+
+        <input type="text" name="from_name" placeholder="Your Name" required>
+        <input type="email" name="reply_to" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit" class="btn2">Send Message</button>
+    </form>
+
+    <!-- SUCCESS POPUP (only one copy) -->
+    <div id="successPopup" style="display:none;">
+        <div class="popup-box-contact">
+            <span class="close-btn-contact" onclick="closePopup()">×</span>
+            <h3>Message Sent</h3>
+            <p>Your message has been sent successfully. We will contact you soon.</p>
+            <button onclick="closePopup()" class="btn2" style="margin-top:10px;">OK</button>
         </div>
     </div>
 
-    <div class="contact-header">
-        <h2>Contact Us</h2>
-        <p>We're here to answer your questions. Send us a message anytime.</p>
+    <!-- CONTACT INFO -->
+    <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><i class="fa-solid fa-envelope"></i> isayed@newcitizennetwork.org</p>
+        <p><i class="fa-solid fa-envelope"></i> info@newcitizennetwork.org</p>
+        <p><i class="fa-solid fa-phone"></i> (215) 888-8321</p>
+        <p><i class="fa-solid fa-location-dot"></i> Philadelphia, PA, USA</p>
+        <p><i class="fa-solid fa-clock"></i> Mon – Fri: 9:00 AM – 5:00 PM</p>
     </div>
 
-    <div class="contact-container">
+</div>
 
-        <!-- CONTACT FORM -->
-      
-            <form id="contactForm"  class="contact-form" onsubmit="sendEmail(event)">
-
-            <h3>Send a Message</h3>
-
-            <input type="text" name="from_name" placeholder="Your Name" required>
-            <input type="email" name="reply_to" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-
-            <button type="submit" class="btn2">Send Message</button>
-        </form>
-
-        <!-- SUCCESS POPUP (only one copy) -->
-        <div id="successPopup" style="display:none;">
-            <div class="popup-box-contact">
-                <span class="close-btn-contact" onclick="closePopup()">×</span>
-                <h3>Message Sent</h3>
-                <p>Your message has been sent successfully. We will contact you soon.</p>
-                <button onclick="closePopup()" class="btn2" style="margin-top:10px;">OK</button>
-            </div>
-        </div>
-
-        <!-- CONTACT INFO -->
-        <div class="contact-info">
-            <h3>Contact Information</h3>
-            <p><i class="fa-solid fa-envelope"></i> isayed@newcitizennetwork.org</p>
-            <p><i class="fa-solid fa-envelope"></i> info@newcitizennetwork.org</p>
-            <p><i class="fa-solid fa-phone"></i> (215) 888-8321</p>
-            <p><i class="fa-solid fa-location-dot"></i> Philadelphia, PA, USA</p>
-            <p><i class="fa-solid fa-clock"></i> Mon – Fri: 9:00 AM – 5:00 PM</p>
-        </div>
-
-    </div>
-
-    <div class="footer">&copy; 2025 <span>NEW CITIZEN NETWORK GROUP</span> All Right Reserved</div>
+<div class="footer">&copy; 2025 <span>NEW CITIZEN NETWORK GROUP</span> All Right Reserved</div>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <script>
-  (function(){
-    emailjs.init("m1Td21VESrxUNXqV7");
-  })();
+(function(){
+emailjs.init("m1Td21VESrxUNXqV7");
+})();
 </script>
 
 
-   <script>
+<script>
 function sendEmail(e) {
     e.preventDefault();
 
-    const button = document.querySelector(".btn2");
+    const form = document.getElementById("contactForm");
+    const button = form.querySelector("button[type='submit']");
+
     button.innerText = "Sending...";
     button.disabled = true;
 
-    emailjs.send("service_dp9my9u", "template_n0mpvm7", {
-        from_name: document.querySelector("[name='from_name']").value,
-        reply_to: document.querySelector("[name='reply_to']").value,
-        message: document.querySelector("[name='message']").value,
+    emailjs.send("service_1hxglm1", "template_81ou6nl", {
+        from_name: form.from_name.value,
+        reply_to: form.reply_to.value,
+        message: form.message.value
     })
     .then(() => {
         button.innerText = "Send Message";
         button.disabled = false;
 
-        document.getElementById("successPopup").style.display = "block";
-        document.getElementById("contactForm").reset();
+        document.getElementById("successPopup").style.display = "flex";
+        form.reset();
     })
-    .catch(() => {
+    .catch((error) => {
         button.innerText = "Send Message";
         button.disabled = false;
-        alert("Message failed. Try again.");
+        alert("Message failed. Check console.");
+        console.error(error);
     });
 }
 
