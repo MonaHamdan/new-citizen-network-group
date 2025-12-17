@@ -35,7 +35,9 @@
     <div class="contact-container">
 
         <!-- CONTACT FORM -->
-        <form id="contactForm" class="contact-form" onsubmit="sendEmail(event)">
+      
+            <form id="contactForm"  class="contact-form" onsubmit="sendEmail(event)">
+
             <h3>Send a Message</h3>
 
             <input type="text" name="from_name" placeholder="Your Name" required>
@@ -68,8 +70,15 @@
     </div>
 
     <div class="footer">&copy; 2025 <span>NEW CITIZEN NETWORK GROUP</span> All Right Reserved</div>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("m1Td21VESrxUNXqV7");
+  })();
+</script>
 
-    <script>
+
+   <script>
 function sendEmail(e) {
     e.preventDefault();
 
@@ -77,34 +86,22 @@ function sendEmail(e) {
     button.innerText = "Sending...";
     button.disabled = true;
 
-    fetch("http://localhost:3000/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            from_name: document.querySelector("[name='from_name']").value,
-            reply_to: document.querySelector("[name='reply_to']").value,
-            message: document.querySelector("[name='message']").value,
-        })
+    emailjs.send("service_dp9my9u", "template_n0mpvm7", {
+        from_name: document.querySelector("[name='from_name']").value,
+        reply_to: document.querySelector("[name='reply_to']").value,
+        message: document.querySelector("[name='message']").value,
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(() => {
         button.innerText = "Send Message";
         button.disabled = false;
 
-        if (data.success) {
-            document.getElementById("successPopup").style.display = "block";
-
-            // Clear the form
-            document.getElementById("contactForm").reset();
-        } 
-        else {
-            alert("Error sending message. Please try again.");
-        }
+        document.getElementById("successPopup").style.display = "block";
+        document.getElementById("contactForm").reset();
     })
     .catch(() => {
         button.innerText = "Send Message";
         button.disabled = false;
-        alert("Server not responding.");
+        alert("Message failed. Try again.");
     });
 }
 
@@ -112,6 +109,7 @@ function closePopup() {
     document.getElementById("successPopup").style.display = "none";
 }
 </script>
+
 
 
 </body>
